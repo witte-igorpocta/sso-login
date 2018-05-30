@@ -1,6 +1,7 @@
 ## sso-login
 Toto rožšíření slouží pro potřeby společnosti WITTE Nejdek, spol. s r.o., WITTE Access Technology s.r.o. a WITTE Paint Application s.r.o.
 <br>
+
 #### Instalace přes composer.json
 Neexistuje varianta pro přímou instalaci z packagist.org !!!
 
@@ -18,14 +19,16 @@ Neexistuje varianta pro přímou instalaci z packagist.org !!!
 ```
 <br>
 <br>
-####Základní nastavení
-Zaregistrujeme knihovnu
 
+#### Základní nastavení
+
+##### Zaregistrujeme knihovnu
 ```
 extensions:
     ssoLogin: wittenejdek\ssologin\SSOLoginExtension
 ```
 
+##### Nastavení rozšíření
 <br>
 Vyplníme základní údaje pro identifikaci aplikace a URL adresy pro autorizační službu.  Redirect URL adresa musí být totožná s URL nastavenou u autorizační služby. V neposlední řadě zaregistrujeme vlastní Authenticator a třídu uživatele.
 
@@ -50,6 +53,8 @@ services:
 		class: wittenejdek\ssologin\SSOUser
 ```
 <br>
+
+##### Nastavíme vlastní callbacky
 Authenticator nabízí dva callbacky, afterTokenRefresh (po obnově tokenu) a afterAuthorize (po autorizaci uživatele).
 Implementace callbacků je možná pomocí handlerů setAfterAuthorize a setAfterTokenRefresh.
 
@@ -91,7 +96,6 @@ public function afterAfterAuthorize(Authenticator $sender, AccessToken $accessTo
 <br>
 
 ##### Zaregistrujeme SSO presenter do routeru
-
 ```php
 public static function createRouter(): Nette\Application\IRouter
 {
