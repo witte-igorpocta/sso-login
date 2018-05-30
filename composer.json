@@ -1,0 +1,21 @@
+{
+    "name": "wittenejdek/sso-login",
+    "description": "WITTE SSO Login",
+    "type": "library",
+    "license": "WITTE",
+    "authors": [
+        {
+            "name": "Igor Pocta",
+            "email": "igor.pocta@witte-automotive.cz"
+        }
+    ],
+
+    "require": {
+        "league/oauth2-client": "^2.3",
+        "nette/application": "^2.4",
+    },
+
+    "autoload": {
+        "psr-4": { "wittenejdek\\ssologin\\": "src/" }
+    }
+}
