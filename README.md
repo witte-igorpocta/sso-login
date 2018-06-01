@@ -7,11 +7,13 @@ Neexistuje varianta pro přímou instalaci z packagist.org !!!
 
 ```javascript
 "repositories": [
-    {
-      "type": "path",
-      "url": "./../_packages/wittenejdek/sso-login/"
-    }
-  ],
+	{
+		"type": "vcs",
+		"url": "https://github.com/wittenejdek/sso-login"
+	}
+],
+
+"require-all": true,
 
  "require": {
     "wittenejdek/sso-login": "dev-master"
