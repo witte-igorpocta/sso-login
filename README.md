@@ -99,6 +99,7 @@ public function afterAfterAuthorize(Authenticator $sender, AccessToken $accessTo
 
 ##### Zaregistrujeme SSO presenter do routeru
 ```php
+use wittenejdek\ssologin\Route as SSORoute;
 public static function createRouter(): Nette\Application\IRouter
 {
 	$router = new RouteList;
