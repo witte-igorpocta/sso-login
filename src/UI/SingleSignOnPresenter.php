@@ -16,6 +16,9 @@ class SingleSignOnPresenter extends Presenter
     /** @var Configuration */
     public $configuration;
 
+    /** @persistent */
+    public $backlink = '';
+
     public function __construct(Authenticator $authenticator, Configuration $configuration)
     {
         $this->authenticator = $authenticator;
