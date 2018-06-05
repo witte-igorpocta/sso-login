@@ -51,12 +51,8 @@ class SingleSignOnPresenter extends Presenter
             exit('Invalid state');
 
         }
+        $this->restoreRequest($this->backlink);
         $this->redirect($this->configuration->url["redirectAfterLogin"]);
-    }
-
-    public function actionTest()
-    {
-        dump($this->authenticator->getIdentity($this->authenticator->accessToken));
     }
     
 }
