@@ -11,10 +11,11 @@ use Nette\Security\IAuthenticator;
 use Nette\Security\Identity;
 use Nette\Security\IIdentity;
 use Nette\Security\IUserStorage;
+use Nette\Security\Permission;
 use Nette\SmartObject;
 use wittenejdek\ssologin\Exception\GeneralException;
 
-final class Authenticator implements IAuthenticator
+final class Authenticator extends Permission implements IAuthenticator
 {
 
     use SmartObject;
