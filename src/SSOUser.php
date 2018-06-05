@@ -64,7 +64,7 @@ final class SSOUser extends User
     {
         $this->logout(true);
         if ($id instanceof IIdentity) {
-            $this->storage->setIdentity($identity);
+            $this->storage->setIdentity($id);
             $this->storage->setAuthenticated(true);
             $this->onLoggedIn($this);
         }
