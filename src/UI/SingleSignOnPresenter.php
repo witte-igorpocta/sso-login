@@ -27,6 +27,7 @@ class SingleSignOnPresenter extends Presenter
 
     public function actionDefault()
     {
+        $this->authenticator->setState($this->backlink);
         $this->authenticator->authorize();
         $this->terminate();
     }
@@ -54,8 +55,13 @@ class SingleSignOnPresenter extends Presenter
             exit('Invalid state');
 
         }
-        $this->restoreRequest($this->backlink);
+
+        if($this->getParameter('state', false)) {
+            $this->backlink = $this->getParameter('state');
+            $this->restoreRequest($this->backlink);
+        }
+
         $this->redirect($this->configuration->url["redirectAfterLogin"]);
     }
-    
+
 }

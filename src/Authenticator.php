@@ -34,7 +34,7 @@ final class Authenticator extends Permission implements IAuthenticator
 
     /** @var GenericProvider */
     protected $provider;
-    
+
     /** @var ResourceOwnerInterface */
     protected $resourceOwner;
 
@@ -43,6 +43,9 @@ final class Authenticator extends Permission implements IAuthenticator
 
     /** @var Callable */
     public $afterAuthorize;
+
+    /** @var null|string */
+    protected $state;
 
     public function __construct(Session $session,
                                 Configuration $configuration,
@@ -123,16 +126,15 @@ final class Authenticator extends Permission implements IAuthenticator
         $this->resourceOwner = $this->provider->getResourceOwner($accessToken);
 
         $ssoData = $this->resourceOwner->toArray();
-        
+
         // Force logout
         if(in_array('logout', $ssoData)
             || array_key_exists('logout', $ssoData)
             || (array_key_exists('error', $ssoData) && $ssoData["error"] === "access_denied")) {
-            bdump("getIdentity - SSODATA - force logout");
             $this->destroyAccessToken();
             return null;
         }
-        
+
         return $this->resourceOwner ? $this->resourceOwner : null;
     }
 
@@ -147,7 +149,14 @@ final class Authenticator extends Permission implements IAuthenticator
         // Fetch the authorization URL from the provider; this returns the
         // urlAuthorize option and generates and applies any necessary parameters
         // (e.g. state).
-        $authorizationUrl = $this->provider->getAuthorizationUrl(['scope' => implode(" ", $this->configuration->permissions)]);
+
+        $url = [];
+        $url['scope'] = implode(" ", $this->configuration->permissions);
+        if($this->hasState()) {
+            $url['state'] = $this->getState();
+        }
+
+        $authorizationUrl = $this->provider->getAuthorizationUrl($url);
 
         // Get the state generated for you and store it to the session.
         $this->session->offsetSet('oauth2state', $this->provider->getState());
@@ -195,6 +204,21 @@ final class Authenticator extends Permission implements IAuthenticator
         return $this->provider;
     }
 
+    public function hasState(): bool
+    {
+        return $this->state !== null;
+    }
+
+    public function getState(): string
+    {
+        return $this->state;
+    }
+
+    public function setState(?string $state): void
+    {
+        $this->state = $state;
+    }
+
     /**
      * @return ResourceOwnerInterface
      */
@@ -223,7 +247,7 @@ final class Authenticator extends Permission implements IAuthenticator
     {
         // Get resource owner data
         $ssoData = $this->resourceOwner->toArray();
-        
+
         $identity = new Identity($ssoData["username"], $ssoData["roles"], $ssoData);
         $this->userStorage
             ->setIdentity($identity)
@@ -235,7 +259,7 @@ final class Authenticator extends Permission implements IAuthenticator
     {
         // Get resource owner data
         $ssoData = $this->resourceOwner->toArray();
-        
+
         $identity = new Identity($ssoData["username"], $ssoData["roles"], $ssoData);
 
         $this->userStorage
