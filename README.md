@@ -42,7 +42,7 @@ ssoLogin:
     applicationSecret: "CLIENT SECRET"
 
     uri:
-        redirect: "http://cesta k aplikaci/sso/callback"
+        redirect: "http://<cesta k aplikaci>/ssologin/callback"
         authorize: "http://orion2.wnc.local/sso/oauth2/authorize"
         accessToken: "http://orion2.wnc.local/sso/oauth2/access-token"
         resourceOwnerDetails: "http://orion2.wnc.local/sso/resource"
@@ -108,5 +108,5 @@ public static function createRouter(): Nette\Application\IRouter
 }
 ```
 <br>
-Odkaz na přihlášení je pod https://cestakaplikaci/sso. 
+Odkaz na přihlášení je pod https://<cestakaplikaci>/ssologin. 
 
