@@ -37,8 +37,11 @@ class SingleSignOnPresenter extends Presenter
 
         if (array_key_exists('error', $this->getParameters())) {
 
-            echo $this->getParameter('message', 'Unknown error');
-            die;
+        	$this->getTemplate()->setFile(__DIR__ .  '/template/error.latte' );
+        	$this->getTemplate()->error = $this->getParameter('error', 'ERROR');
+			$this->getTemplate()->message = $this->getParameter('message', 'Something is wrong :(');
+			$this->getTemplate()->hint = $this->getParameter('hint', 'Try it later');
+			return;
 
         } elseif ($this->getParameter('code', false)) {
             $this->authenticator->finishAuthorization($this->getParameter('code'));

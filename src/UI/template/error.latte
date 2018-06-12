@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Simple HttpErrorPages | MIT License | https://github.com/AndiDittrich/HttpErrorPages -->
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title>We've got some trouble</title>
+	<style type="text/css">/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
+
+		body, html {
+			width: 100%;
+			height: 100%;
+			background-color: #d92a36;
+			overflow: hidden;
+		}
+
+		body {
+			color: #fff;
+			text-align: center;
+			padding: 0;
+			min-height: 100%;
+			display: table;
+			font-family: "Open Sans", Arial, sans-serif
+		}
+
+		h1 {
+			font-family: inherit;
+			font-weight: 700;
+			line-height: 1.1;
+			color: inherit;
+			font-size: 36px
+		}
+
+		a {
+			text-decoration: none;
+			color: #fff;
+			font-size: inherit;
+		}
+
+		.lead {
+			color: #fff;
+			font-size: 21px;
+			line-height: 1.4
+		}
+
+		.lead small {
+			color: #fff;
+			font-size: 16px;
+			line-height: 1.4
+		}
+
+		.cover {
+			display: table-cell;
+			vertical-align: middle;
+		}
+
+		.button {
+			background: #0073aa;
+			color: #fff;
+			padding:12px;
+			text-transform: uppercase;
+			font-weight: 600;
+			outline: 3px solid #005984;
+		}
+
+		.button:hover {
+			background: #005984;
+		}
+	</style>
+</head>
+<body>
+<div class="cover">
+	<div class="message">
+		<h1>{$error === "access_denied" ? "ACCESS DENIED" : $error}</h1>
+		<p class="lead">
+			{$hint}<br/><br/>
+			<em>
+				<small>({$message})</small>
+			</em><br/><br/>
+			<br/>
+			<a href="{$basePath}" class="button">Back to base url</a>
+		</p>
+	</div>
+</div>
+</body>
+</html>
