@@ -108,5 +108,5 @@ public static function createRouter(): Nette\Application\IRouter
 }
 ```
 <br>
-Odkaz na přihlášení je pod https:// <cestakaplikaci> /ssologin. 
+Odkaz na přihlášení je pod https://cestakaplikaci/ssologin. 
 
